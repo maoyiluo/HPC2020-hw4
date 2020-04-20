@@ -8,6 +8,7 @@ void iterate(double* u_kp1, double* u_k, double* f, double *h_c){
     double h = *h_c;
     if(row >=1 && row <= N && col >=1 && col <= N){
         u_kp1[row*(N+2) + col] = 1.0/4*(h*h*f[(row-1)*N + col-1] + u_k[(row-1)*(N+2) + col] + u_k[row*(N+2) + col - 1] + u_k[(row+1)*(N+2) + col] + u_k[row*(N+2) + col+1]);
+        //printf("%f %f\n", u_kp1[row*(N+2) + col], 1.0/4*(h*h*f[(row-1)*N + col-1] + u_k[(row-1)*(N+2) + col] + u_k[row*(N+2) + col - 1] + u_k[(row+1)*(N+2) + col] + u_k[row*(N+2) + col+1]));
     }
 }
 
@@ -17,6 +18,7 @@ void update(double* u_kp1, double* u_k){
     int col = blockIdx.x * blockDim.x + threadIdx.x;
     if(row >=1 && row <= N && col >=1 && col <= N){
         u_k[row*(N+2) + col] = u_kp1[row*(N+2) + col];
+        printf("%f, %f\n", u_k[row*(N+2) + col], u_kp1[row*(N+2) + col]);
     }
 }
 
@@ -47,7 +49,7 @@ int main(){
 
     for (int i = 0; i < N; i++){
         for(int j = 0; j < N; j++){
-            f[i*N + j] = 1.0;
+            f[i*N + j] = 100.0;
         }
     }
 
@@ -69,7 +71,7 @@ int main(){
     dim3 block(32, 32);
     dim3 grid(32, 32);
 
-    while(initial_residual/current_residual <=1e6 && iteration < 100000){
+    while(initial_residual/current_residual <=1e6 && iteration < 10000){
         iterate<<<grid,block>>>(u_kp1_d, u_k_d, f_d, h_d);
 		cudaDeviceSynchronize();
 		update<<<grid,block>>>(u_kp1_d, u_k_d);
