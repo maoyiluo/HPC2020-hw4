@@ -1,4 +1,5 @@
 #include "residual.h"
+#include <stdlib.h>
 #define N 1024
 
 __global__ 
@@ -42,13 +43,13 @@ int main(){
 
     for(int i = 0; i < N+2; i++){
         for(int j = 0; j < N+2; j++){
-            u_k[i*(N+2) + j] = 0;
+            u_k[i*(N+2) + j] = rand() % 1;
         }
     }
 
     for (int i = 0; i < N; i++){
         for(int j = 0; j < N; j++){
-            f[i*N + j] = 100.0;
+            f[i*N + j] = 1;
         }
     }
 
