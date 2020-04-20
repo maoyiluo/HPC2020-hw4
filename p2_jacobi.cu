@@ -18,7 +18,6 @@ void update(double* u_kp1, double* u_k){
     int col = blockIdx.x * blockDim.x + threadIdx.x;
     if(row >=1 && row <= N && col >=1 && col <= N){
         u_k[row*(N+2) + col] = u_kp1[row*(N+2) + col];
-        printf("%f, %f\n", u_k[row*(N+2) + col], u_kp1[row*(N+2) + col]);
     }
 }
 
