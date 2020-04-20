@@ -78,11 +78,11 @@ int main(){
 		cudaDeviceSynchronize();
         iteration++;
         if(iteration %100 == 0){
-            cudaMemcpy(u_k_d, u_k, (N+2)*(N+2)*sizeof(double), cudaMemcpyDeviceToHost); 
+            cudaMemcpy(u_k, u_k_d, (N+2)*(N+2)*sizeof(double), cudaMemcpyDeviceToHost); 
             current_residual = residual(u_k,f,h,N);
         }
     }
-    cudaMemcpy(u_k_d, u_k, (N+2)*(N+2)*sizeof(double), cudaMemcpyDeviceToHost); 
+    cudaMemcpy(u_k, u_k_d, (N+2)*(N+2)*sizeof(double), cudaMemcpyDeviceToHost); 
     current_residual = residual(u_k,f,h,N);
     printf("inital_residual = %f last residual = %f\n", initial_residual ,current_residual);
 }
