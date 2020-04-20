@@ -43,7 +43,7 @@ int main(){
 
     for(int i = 0; i < N+2; i++){
         for(int j = 0; j < N+2; j++){
-            u_k[i*(N+2) + j] = rand() % 1;
+            u_k[i*(N+2) + j] = rand() % 5;
         }
     }
 
