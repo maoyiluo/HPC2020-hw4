@@ -10,4 +10,4 @@ matrix_vector: p1_matrix_vector.cu
 	${CC} -o p1_matrix_vector ${CFLAGS} p1_matrix_vector.cu
 
 jacobi: p2_jacobi.cu
-	${CC} -o p2 p2_jacobi.cu ${CFLAGS}  
+	${CC} -o p2 p2_jacobi.cu ${CFLAGS} -std=c++11
